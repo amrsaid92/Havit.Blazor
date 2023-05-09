@@ -15,14 +15,16 @@
                         {
                             <HxIcon Icon="Icon" />
                         }
-
-                        <span class="hx-sidebar-item-navlink-content-inner">
-                            @if (ContentTemplate is not null)
-                            {
-                                @ContentTemplate(new(){ ItemExpanded = null })
-                            }
-                            @Text
-                        </span>
+                        @if (!ParentSidebar.Collapsed || ParentSidebarItem is not null) 
+                        {
+                            <span class="hx-sidebar-item-navlink-content-inner">
+                                @if (ContentTemplate is not null)
+                                {
+                                    @ContentTemplate(new(){ ItemExpanded = null })
+                                }
+                                @Text
+                            </span>
+                        }
                     </div>
 
                 </div>
@@ -30,24 +32,6 @@
         }
         else
         {
-                RenderFragment itemNavLinkContent =
-                @<div class="hx-sidebar-item-navlink-content">
-                    @if (Icon is not null)
-                    {
-                        <HxIcon Icon="Icon" />
-                    }
-
-                    <span class="hx-sidebar-item-navlink-content-inner">
-                        @if (ContentTemplate is not null)
-                        {
-                            @ContentTemplate(new() { ItemExpanded = this.expanded })
-                        }
-                        @Text
-                    </span>
-
-                    <HxIcon Icon="@BootstrapIcon.ChevronRight" CssClass="expand-icon" />
-                </div>;
-
             @if (ParentSidebar.Collapsed)
             {
                 <HxDropdown Direction="DropdownDirection.End" CssClass="hx-sidebar-item">
@@ -60,8 +44,10 @@
                            data-bs-toggle="dropdown"
                            aria-expanded="@(this.expanded ? "true" : "false")">
                         
-                           @itemNavLinkContent
-
+                        @if (Icon is not null)
+                        {
+                            <HxIcon Icon="Icon" />
+                        }
                     </HxNavLink>
 
                     <HxDropdownMenu CssClass="hx-sidebar-subitems">
@@ -82,7 +68,21 @@
                         data-bs-target="@("#" + id)"
                         aria-expanded="@(this.expanded ? "true" : "false")">
 
-                        @itemNavLinkContent
+                    <div class="hx-sidebar-item-navlink-content">
+                        @if (Icon is not null)
+                        {
+                            <HxIcon Icon="Icon" />
+                        }
+                        <span class="hx-sidebar-item-navlink-content-inner">
+                            @if (ContentTemplate is not null)
+                            {
+                                @ContentTemplate(new() { ItemExpanded = this.expanded })
+                            }
+                            @Text
+                        </span>
+
+                        <HxIcon Icon="@BootstrapIcon.ChevronRight" CssClass="expand-icon" />
+                    </div>
 
                 </HxNavLink>
 

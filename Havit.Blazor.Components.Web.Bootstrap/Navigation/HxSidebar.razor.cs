@@ -88,6 +88,12 @@ public partial class HxSidebar : ComponentBase
 		await InvokeCollapsedChangedAsync(Collapsed);
 	}
 
+	private async Task SetCollapsed(bool state)
+	{
+		Collapsed = state;
+		await InvokeCollapsedChangedAsync(Collapsed);
+	}
+
 	private string GetResponsiveCssClass(string cssClassPattern)
 	{
 		return this.ResponsiveBreakpoint switch

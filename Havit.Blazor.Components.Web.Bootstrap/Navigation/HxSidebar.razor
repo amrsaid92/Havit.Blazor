@@ -1,16 +1,17 @@
 ﻿@namespace Havit.Blazor.Components.Web.Bootstrap
 
 <div class="@CssClassHelper.Combine("hx-sidebar", GetResponsiveCssClass("flex-??-grow-0"), GetCollapsedCssClass(), this.CssClass)" id="@Id">
-    <div class="nav-menu d-flex flex-column flex-grow-1 position-relative">
+    <div class="nav-menu">
 
         @if (HeaderTemplate is not null)
         {
-            <div class="hx-sidebar-header d-flex align-items-center">
+            <div class="hx-sidebar-header">
                 <CascadingValue Value="@this">
                     @HeaderTemplate
                 </CascadingValue>
                 <HxButton
-                    CssClass="@CssClassHelper.Combine("hx-sidebar-navbar-toggler ms-auto", GetResponsiveCssClass("d-??-none"))"
+                    CssClass="@CssClassHelper.Combine("hx-sidebar-navbar-toggler", GetResponsiveCssClass("d-??-none"))"
+                    OnClick=@(async () => await SetCollapsed(false))
                     data-bs-toggle="collapse"
                     data-bs-target="@($"#{NavContentElementId}")"
                     aria-controls="@NavContentElementId"
@@ -21,8 +22,8 @@
         }
 
         <div class="@CssClassHelper.Combine("hx-sidebar-collapse collapse", GetResponsiveCssClass("d-??-flex"), (!Collapsed) ? "overflow-auto": null)" id="@NavContentElementId">
-            <div class="hx-sidebar-body mb-auto w-100">
-                <HxNav Id="@navId" Orientation="NavOrientation.Vertical" CssClass="ps-0">
+            <div class="hx-sidebar-body">
+                <HxNav Id="@navId" Orientation="NavOrientation.Vertical">
                     <CascadingValue Value="@this" IsFixed="true">
                         @ItemsTemplate
                     </CascadingValue>
@@ -34,9 +35,7 @@
                     {
                         <div class="@CssClassHelper.Combine(
                             "hx-sidebar-toggler-icon-wrapper",
-                            "d-none", // Hide the sidebar toggler in navbar mode (when below the responsive breakpoint).
                             GetResponsiveCssClass("d-??-flex"))">
-
                             <HxIcon CssClass="hx-sidebar-toggler-icon" Icon="@(Collapsed ? ExpandIcon : CollapseIcon)" />
                         </div>
                     }
