@@ -1,0 +1,23 @@
+<HxCard>
+	<BodyTemplate>
+		<HxCardTitle>
+			<HxIcon style="@($"color: var({IconColor});")" CssClass="me-1" Icon="@Icon" />
+			@Title
+		</HxCardTitle>
+		<p class="text-body-tertiary">@Description</p>
+	</BodyTemplate>
+</HxCard>
+
+@code {
+	[Parameter]
+	public string Title { get; set; }
+
+	[Parameter]
+	public string Description { get; set; }
+
+	[Parameter]
+	public BootstrapIcon Icon { get; set; }
+
+	[Parameter]
+	public string IconColor { get; set; }
+}

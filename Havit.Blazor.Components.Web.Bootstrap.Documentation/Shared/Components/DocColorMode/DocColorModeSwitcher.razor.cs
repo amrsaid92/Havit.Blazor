@@ -14,6 +14,7 @@ namespace Havit.Blazor.Components.Web.Bootstrap.Documentation.Shared.Components.
 /// </remarks>
 public partial class DocColorModeSwitcher : IDisposable
 {
+	[Parameter] public string CssClass { get; set; }
 	[Inject] protected IDocColorModeResolver DocColorModeResolver { get; set; }
 	[Inject] protected PersistentComponentState PersistentComponentState { get; set; }
 	[Inject] protected IJSRuntime JSRuntime { get; set; }

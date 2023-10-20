@@ -1,5 +1,7 @@
 :root {
 	--hx-sidebar-width: 320px;
+	--hx-sidebar-brand-logo-width: 37px;
+	--hx-sidebar-brand-logo-height: 35px;
 }
 
 #blazor-error-ui {
@@ -19,6 +21,11 @@
 	position: absolute;
 	right: 0.75rem;
 	top: 0.5rem;
+}
+
+.container-floating {
+    max-width: 1600px;
+	margin: 0 auto;
 }
 
 code[class*=language-],
