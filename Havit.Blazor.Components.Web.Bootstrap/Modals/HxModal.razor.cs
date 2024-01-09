@@ -237,7 +237,9 @@ public partial class HxModal : IAsyncDisposable
 	/// </summary>
 	public async Task HideAsync()
 	{
-		await jsModule.InvokeVoidAsync("hide", modalElement);
+ 		// Check if the modal is open close it else ignore or it will throw an exception
+ 		if(opened)
+			await jsModule.InvokeVoidAsync("hide", modalElement);
 	}
 
 	/// <summary>
