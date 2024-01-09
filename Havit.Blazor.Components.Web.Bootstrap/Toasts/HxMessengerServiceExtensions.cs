@@ -34,6 +34,29 @@ public static class HxMessengerServiceExtensions
 	}
 
 	/// <summary>
+	/// Adds and shows a successful message. The message is automatically hidden 5 seconds after showing up.
+	/// </summary>
+	public static void AddSuccess(this IHxMessengerService messenger, string message)
+	{
+		AddSuccess(messenger, title: null, message);
+	}
+
+	/// <summary>
+	/// Adds and shows a success message. The message is automatically hidden 5 seconds after showing up.
+	/// </summary>
+	public static void AddSuccess(this IHxMessengerService messenger, string title, string message)
+	{
+		Contract.Requires<ArgumentNullException>(messenger != null, nameof(messenger));
+
+		messenger.AddMessage(new BootstrapMessengerMessage()
+		{
+			Color = Defaults.SuccessColor,
+			AutohideDelay = Defaults.InformationAutohideDelay,
+			ContentTemplate = BuildContentTemplate(title, message)
+		});
+	}
+
+	/// <summary>
 	/// Adds and shows a warning message.
 	/// </summary>
 	public static void AddWarning(this IHxMessengerService messenger, string message)
